@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "LaTeX: Compile main.tex",
+      "type": "shell",
+      "command": "bash ./scripts/compile-thesis.sh quick",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$latex",
+      "presentation": {
+        "reveal": "silent",
+        "focus": false,
+        "echo": true
+      }
+    },
+    {
+      "label": "LaTeX: Full compile (pdflatex + bibtex + pdflatex × 2)",
+      "type": "shell",
+      "command": "bash ./scripts/compile-thesis.sh full",
+      "group": {
+        "kind": "build"
+      },
+      "problemMatcher": "$latex",
+      "presentation": {
+        "reveal": "silent",
+        "focus": true
+      }
+    },
+    {
+      "label": "Thesis: Rebuild with appended papers",
+      "type": "shell",
+      "command": "bash ./scripts/compile-thesis.sh full",
+      "problemMatcher": "$latex",
+      "presentation": {
+        "reveal": "always",
+        "focus": true
+      }
+    },
+    {
+      "label": "LaTeX: Clean build artifacts",
+      "type": "shell",
+      "command": "bash ./scripts/compile-thesis.sh clean",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent"
+      }
+    },
+    {
+      "label": "LaTeX: View main.pdf",
+      "type": "shell",
+      "command": "open manuscript/main.pdf || xdg-open manuscript/main.pdf",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent"
+      }
+    }
+  ]
+}

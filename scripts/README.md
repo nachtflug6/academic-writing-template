@@ -1,0 +1,53 @@
+# Scripts
+
+Automation scripts for build, checks, and maintenance tasks.
+
+Available scripts:
+
+- `compile-thesis.sh full` — full thesis build (`pdflatex`, `bibtex`, `pdflatex`, `pdflatex`)
+- `compile-thesis.sh quick` — single-pass LaTeX compile
+- `compile-thesis.sh clean` — remove common LaTeX build artifacts from `manuscript/` (including glossary/acronym intermediates)
+- `smartlib_smoke_test.py` — minimal Smart Library API smoke test against an external running instance
+
+## Smart Library smoke test
+
+This repo accesses Smart Library through its HTTP API, not through a direct database connection.
+If Smart Library is already running elsewhere, no extra infrastructure is needed here beyond network reachability to that API.
+
+Configuration:
+
+- Base URL comes from `SMARTLIB_API_URL`
+- Default base URL is `http://localhost:8001`
+
+Recommended shell setup:
+
+```bash
+export SMARTLIB_API_URL=http://localhost:8001
+```
+
+Run:
+
+```bash
+python3 scripts/smartlib_smoke_test.py
+```
+
+Example with explicit base URL:
+
+```bash
+SMARTLIB_API_URL=http://localhost:8001 python3 scripts/smartlib_smoke_test.py
+```
+
+Success looks like:
+
+- A JSON health response such as `{"status": "healthy"}`
+- A formatted summary of `GET /api/documents/` including `total` and a small document preview
+- A final `Smoke test passed` line
+
+For ad hoc access from this repo, use the same base URL with standard HTTP tools, for example:
+
+```bash
+curl -fsS "$SMARTLIB_API_URL/health"
+curl -fsS "$SMARTLIB_API_URL/api/documents/?limit=3&offset=0"
+```
+
+This folder is intentionally lightweight and can evolve with project needs.

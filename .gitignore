@@ -1,0 +1,60 @@
+# LaTeX build artifacts
+*.aux
+*.glo
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex
+*.dvi
+*.ps
+*.pdf
+!papers/*/manuscript/main.pdf
+!manuscript/papers/pdf/*.pdf
+
+# LaTeX intermediate
+*.auxlock
+*.figlist
+*.makefile
+
+# Editor and IDE
+.vscode/settings.json
+.DS_Store
+*~
+*.swp
+*.swo
+.vim/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Temporary files
+*.tmp
+*.temp
+.#*
+
+# Compiled binaries (if applicable)
+*.o
+*.so
+*.a
+
+# Keep source files, bibliography, and configuration
+!README.md
+!*.tex
+!*.bib
+!*.md
+!.github/
+!templates/

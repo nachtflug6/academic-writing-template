@@ -1,0 +1,36 @@
+{
+  "version": "0.2",
+  "ignorePaths": [
+    "**/build/**",
+    "**/*.log",
+    "**/*.pdf"
+  ],
+  "words": [
+    "licentiate",
+    "acknowledgment",
+    "methodologies",
+    "IEEE",
+    "biblatex",
+    "pdflatex",
+    "BibTeX",
+    "TeX",
+    "LaTeX",
+    "microtype",
+    "glossaries",
+    "Chalmers",
+    "Gothenburg",
+    "scalable",
+    "typeset",
+    "typesetting",
+    "synctex",
+    "interestrate",
+    "copilot",
+    "subagent"
+  ],
+  "flagWords": [],
+  "ignoreRegExpList": [
+    "\\\\cite\\{[^}]*\\}",
+    "\\\\ref\\{[^}]*\\}",
+    "\\\\label\\{[^}]*\\}"
+  ]
+}

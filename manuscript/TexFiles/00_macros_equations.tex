@@ -1,0 +1,338 @@
+% ============================
+% NOTATION & MACROS (IMPROVED SYMBOLS)
+% ============================
+
+% ----------------------------
+% Global time axis and gaps
+% ----------------------------
+\newcommand{\TimeAxis}{\mathcal{T}}                        % Global time axis
+\newcommand{\timestep}[1]{t_{#1}}                          % Timestamp at index i
+\newcommand{\TimeGaps}{\boldsymbol{\Delta}}                % Global time-gap sequence
+\newcommand{\timegap}[1]{\delta_{#1}}                      % Time gap at index i
+
+% ----------------------------
+% Observations and sequences
+% ----------------------------
+\newcommand{\obsvec}[1]{\mathbf{x}_{#1}}                   % Observation vector at index i
+\newcommand{\ObsSeq}{\mathbf{X}}                           % Sequence matrix
+\newcommand{\obsval}[2]{x_{#1#2}}                          % Scalar observation value (i,j)
+\newcommand{\obsdim}{D}                                   % Number of observed variables
+\newcommand{\seqlen}{L}                                   % Sequence length
+
+% ----------------------------
+% Masks and time matrices
+% ----------------------------
+\newcommand{\Mask}{\mathsf{M}}                             % Mask matrix (sans serif for logical structure)
+\newcommand{\mask}[2]{m_{#1#2}}                            % Mask entry (i,j)
+\newcommand{\DeltaT}{\mathbf{\Delta t}}                    % Matrix of per-variable time gaps
+\newcommand{\deltat}[2]{\Delta t_{#1#2}}                   % Time since last obs of variable j at i
+\newcommand{\TimeMat}{\mathbf{T}}                          % Matrix of timestamps
+
+% ----------------------------
+% Hidden states
+% ----------------------------
+\newcommand{\hstate}[1]{\mathbf{h}_{#1}}                   % Hidden state at index i (vector)
+\newcommand{\hidden}{\mathbf{h}}                           % Generic hidden state
+\newcommand{\hcont}[1]{\mathbf{h}\!\left(#1\right)}         % Continuous-time hidden state h(t)
+\newcommand{\cstate}[1]{\mathbf{c}_{#1}}                   % LSTM cell state
+
+% ----------------------------
+% Embeddings
+% ----------------------------
+\newcommand{\embedvec}[1]{\mathbf{e}_{#1}}                 % Embedding vector at index i
+\newcommand{\EmbedMat}{\mathbf{E}}                         % Embedding matrix
+\newcommand{\Wembed}{\mathbf{W}_{\mathrm{in}}}             % Input projection matrix
+\newcommand{\PEmat}{\mathbf{P}}                            % Positional/time embedding matrix
+
+% ----------------------------
+% Model weights / projections
+% ----------------------------
+\newcommand{\Weight}{\mathbf{W}}                           % Generic weight matrix
+\newcommand{\Wout}{\mathbf{W}_{\mathrm{out}}}              % Output projection matrix
+
+% ----------------------------
+% Attention-specific matrices
+% ----------------------------
+\newcommand{\Qmat}{\mathbf{Q}}                             % Query matrix
+\newcommand{\Kmat}{\mathbf{K}}                             % Key matrix
+\newcommand{\Vmat}{\mathbf{V}}                             % Value matrix
+
+% Projection weight matrices for attention
+\newcommand{\WQ}{\mathbf{W}_{\!Q}}                          % Projection for queries
+\newcommand{\WK}{\mathbf{W}_{\!K}}                          % Projection for keys
+\newcommand{\WV}{\mathbf{W}_{\!V}}                          % Projection for values
+
+% Dimensionality of key vectors
+\newcommand{\dkey}{d_k}                                   % Key dimension (scalar)
+
+% ----------------------------
+% Kernels and convolutions
+% ----------------------------
+\newcommand{\kernelsize}{\mathcal{K}}                      % Kernel size
+\newcommand{\kernelweight}[1]{w_{#1}}                      % Kernel weight
+
+% ----------------------------
+% Functions for dynamics
+% ----------------------------
+\newcommand{\DriftNet}{f_\theta}                          % Drift term network
+\newcommand{\DiffNet}{g_\theta}                           % Diffusion term network
+
+% Wiener process
+\newcommand{\Wiener}[1]{\mathcal{W}_{#1}}                 % Wiener process at time t
+
+% Data distributions
+\newcommand{\pdata}{p_{\mathrm{data}}}                     % Data distribution
+\newcommand{\pz}{p_z}                                     % Latent prior distribution
+
+% ----------------------------
+% Loss terms
+% ----------------------------
+\newcommand{\Loss}{\mathcal{L}}                            % Generic loss
+\newcommand{\LossRec}{\mathcal{L}_{\mathrm{rec}}}          % Reconstruction loss
+\newcommand{\LossPred}{\mathcal{L}_{\mathrm{pred}}}        % Prediction loss
+\newcommand{\LossAux}[1]{\mathcal{L}_{\mathrm{aux},#1}}    % Auxiliary loss
+\newcommand{\LossTPP}{\mathcal{L}_{\mathrm{TPP}}}          % Temporal Point Process loss
+\newcommand{\LossELBO}{\mathcal{L}_{\mathrm{ELBO}}}        % ELBO loss
+\newcommand{\LossGAN}{\mathcal{L}_{\mathrm{GAN}}}          % GAN loss
+
+% ----------------------------
+% Other math
+% ----------------------------
+\newcommand{\Intensity}{\lambda}                          % Intensity function
+\newcommand{\KL}{\mathrm{KL}}                             % Kullback–Leibler divergence
+\newcommand{\Expect}{\mathbb{E}}                          % Expectation
+
+% ============================
+% EQUATION MACROS
+% ============================
+
+% Global time axis
+\newcommand{\EqGlobalTime}{
+\begin{equation}
+\TimeAxis = ( \timestep{1}, \timestep{2}, \dots, \timestep{\seqlen} ), 
+\quad \TimeAxis \in \mathbb{R}^\seqlen .
+\label{eq:globaltime}
+\end{equation}
+}
+
+% Global time gaps
+\newcommand{\EqGlobalDelta}{
+\begin{equation}
+\TimeGaps = ( \timegap{1}, \timegap{2}, \dots, \timegap{\seqlen} ), 
+\quad \TimeGaps \in \mathbb{R}^\seqlen .
+\label{eq:globaldelta}
+\end{equation}
+}
+
+% Sequence matrix
+\newcommand{\EqSequence}{
+\begin{equation}
+\ObsSeq = \left( \obsvec{1}, \obsvec{2}, \dots, \obsvec{\seqlen} \right), 
+\quad \ObsSeq \in \mathbb{R}^{\obsdim \times \seqlen}.
+\label{eq:sequence}
+\end{equation}
+}
+
+% Mask matrix
+\newcommand{\EqMask}{
+\begin{equation}
+\Mask \in \{0,1\}^{\obsdim \times \seqlen}, \quad
+\mask{i}{j} =
+\begin{cases}
+1 & \text{if variable $x_{ij}$ is observed}, \\
+0 & \text{otherwise}.
+\end{cases}
+\label{eq:mask}
+\end{equation}
+}
+
+% Δt matrix
+\newcommand{\EqDeltaT}{
+\begin{equation}
+\DeltaT \in \mathbb{R}^{\obsdim \times \seqlen}, \quad  
+\deltat{i}{j} = \timestep{i} - t'_{ij},
+\label{eq:dt}
+\end{equation}
+}
+
+% Timestamp matrix
+\newcommand{\EqTimeMat}{
+\begin{equation}
+\TimeMat \in \mathbb{R}^{\obsdim \times \seqlen}, 
+\label{eq:T}
+\end{equation}
+}
+
+% Gaussian Process interpolation
+\newcommand{\EqGPInterp}{
+\begin{equation}
+\big[f(\timestep{1}), \dots, f(\timestep{n})\big]^\top 
+\sim \mathcal{N}(m, K), 
+\quad m_i = m(\timestep{i}), \quad K_{ij} = k(\timestep{i}, \timestep{j}) .
+\label{eq:gp_interp}
+\end{equation}
+}
+
+% Embedding
+\newcommand{\EqEmbed}{
+\begin{equation}
+\embedvec{i} = \Wembed \obsvec{i}, 
+\quad 
+\EmbedMat = \left[ \embedvec{1}, \dots, \embedvec{\seqlen} \right].
+\label{eq:embed}
+\end{equation}
+}
+
+% ----------------------------
+% Time encoding (sinusoidal) for continuous time
+% ----------------------------
+\newcommand{\TimeEncoding}[2]{z(\timestep{#1})^{(#2)}}   % Time encoding at time t_i, dim k
+
+\newcommand{\EqTimeEncoding}{
+\begin{equation}
+\TimeEncoding{i}{k} =
+\begin{cases}
+\cos\!\left(\tfrac{\timestep{i}}{10000^{(k-1)/M}}\right), & k \ \text{odd}, \\[6pt]
+\sin\!\left(\tfrac{\timestep{i}}{10000^{k/M}}\right), & k \ \text{even},
+\end{cases}
+\label{eq:time_encoding}
+\end{equation}
+}
+
+% Self-attention
+\newcommand{\EqAttention}{
+\begin{equation}
+\mathrm{Attention}(Q, K, V) = \mathrm{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V .
+\label{eq:attention}
+\end{equation}
+}
+
+% RNN update (discrete)
+\newcommand{\EqRNN}{
+\begin{equation}
+\hstate{i} = \mathrm{RNN}(\hstate{i-1}, \obsvec{i}).
+\label{eq:rnn}
+\end{equation}
+}
+
+% Decay of hidden state (continuous)
+\newcommand{\EqDecay}{
+\begin{equation}
+\hcont{t} = \hstate{i} \cdot f(t - \timestep{i}).
+\label{eq:decay}
+\end{equation}
+}
+
+% Inline imputation
+\newcommand{\EqImputation}{
+\begin{equation}
+\hat{x}_i = (1 - m_i)\, f_\theta(\hstate{i-1}) + m_i\, x_i .
+\label{eq:imputation}
+\end{equation}
+}
+
+\newcommand{\EqConv}{
+\begin{equation}
+\hstate{i} = \sum_{k=0}^{\kernelsize-1} \kernelweight{k}\,\obsval{i-k}{} .
+\label{eq:conv}
+\end{equation}
+}
+
+% ----------------------------
+% Augmented supervised loss
+% ----------------------------
+\newcommand{\EqAugmentedLoss}{
+\begin{equation}
+\Loss = \LossPred + \sum_i \lambda_i \LossAux{i} .
+\label{eq:augmented_loss}
+\end{equation}
+}
+
+% Reconstruction loss
+\newcommand{\EqRecLoss}{
+\begin{equation}
+\LossRec = 
+\sum_{i \in \mathcal{O}} \| x_i - \hat{x}_i \|^2 .
+\label{eq:reconstruction_loss}
+\end{equation}
+}
+
+% ELBO
+\newcommand{\EqELBO}{
+\begin{equation}
+\LossELBO = 
+\Expect_{q_\phi(z|x)} [\log p_\theta(x|z)] 
+- \KL\!\left(q_\phi(z|x) \,\|\, p(z)\right).
+\label{eq:elbo}
+\end{equation}
+}
+
+% GAN loss
+\newcommand{\EqGAN}{
+\begin{equation}
+\min_G \max_D \ 
+\Expect_{x \sim \pdata} [\log D(x)] 
++ \Expect_{z \sim \pz} [\log (1 - D(G(z)))] .
+\label{eq:gan_loss}
+\end{equation}
+}
+
+% TPP loss
+\newcommand{\EqTPP}{
+\begin{equation}
+\LossTPP = 
+\sum_{i=1}^N \log \Intensity(\timestep{i}) 
+- \int_0^T \Intensity(s)\,ds .
+\label{eq:tpp_loss}
+\end{equation}
+}
+
+% Hawkes process intensity
+\newcommand{\EqHawkes}{
+\begin{equation}
+\Intensity(t) = \mu + \sum_{\timestep{i} < t} g(t - \timestep{i}) .
+\label{eq:hawkes}
+\end{equation}
+}
+
+% Neural ODE
+\newcommand{\EqNODE}{
+\begin{equation}
+\hcont{t} = \hcont{t_0} + \int_{t_0}^t f_\theta(\hcont{s}, s)\, ds .
+\label{eq:node_integral}
+\end{equation}
+}
+
+% ODE-RNN
+\newcommand{\EqODERNN}{
+\begin{equation}
+\hcont{t} = 
+\begin{cases}
+\displaystyle \hcont{t_{i-1}} + \int_{t_{i-1}}^{t} f_\theta(\hcont{s}, s)\,ds, & t \in (t_{i-1}, t_i), \\[10pt]
+\mathrm{RNN}(\hcont{t}, \obsvec{i}), & t = t_i.
+\end{cases}
+\label{eq:ode_rnn}
+\end{equation}
+}
+
+% Neural flow trajectory macro
+\newcommand{\NeuralFlow}[2]{F_\theta\bigl(#1, #2\bigr)}
+
+% Neural CDE
+\newcommand{\EqNCDE}{
+\begin{equation}
+\hcont{t} = \hcont{t_0} + \int_{t_0}^t f_\theta(\hcont{s}) \, d\ObsSeq(s) .
+\label{eq:ncde}
+\end{equation}
+}
+
+% SDE
+\newcommand{\EqNSDE}{
+\begin{equation}
+\hcont{t} = \hcont{t_0} 
++ \int_{t_0}^t \DriftNet(\hcont{s}, s)\,ds 
++ \int_{t_0}^t \DiffNet(\hcont{s}, s)\,d\Wiener{s} .
+\label{eq:nsde_integral}
+\end{equation}
+}
+
