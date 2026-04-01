@@ -4,10 +4,36 @@ Automation scripts for build, checks, and maintenance tasks.
 
 Available scripts:
 
-- `compile-thesis.sh full` — full thesis build (`pdflatex`, `bibtex`, `pdflatex`, `pdflatex`)
-- `compile-thesis.sh quick` — single-pass LaTeX compile
-- `compile-thesis.sh clean` — remove common LaTeX build artifacts from `manuscript/` (including glossary/acronym intermediates)
+- `compile-thesis.sh` — generic LaTeX build helper for any entry `.tex` file in `manuscript/`
 - `smartlib_smoke_test.py` — minimal Smart Library API smoke test against an external running instance
+
+## compile-thesis.sh
+
+Usage:
+
+```bash
+bash ./scripts/compile-thesis.sh <quick|full|clean> [entry_tex]
+```
+
+Examples:
+
+```bash
+bash ./scripts/compile-thesis.sh quick manuscript/main.tex
+bash ./scripts/compile-thesis.sh full manuscript/venue-template/paper.tex
+bash ./scripts/compile-thesis.sh clean
+```
+
+Default entry behavior:
+
+- If `[entry_tex]` is provided, it is used.
+- Else if `MANUSCRIPT_ENTRY` is set, that is used.
+- Else fallback is `manuscript/main.tex`.
+
+Mode behavior:
+
+- `quick`: one `pdflatex` pass.
+- `full`: one `pdflatex` pass, optional `bibtex`/`makeglossaries` when relevant files exist, then two more `pdflatex` passes.
+- `clean`: recursively removes LaTeX artifacts under `manuscript/`.
 
 ## Smart Library smoke test
 

@@ -1,11 +1,33 @@
-# Manuscript
+# Manuscript Drop-In Workspace
 
-This folder contains final LaTeX manuscript writing and compilation assets.
+This folder is intentionally empty and unconstrained.
 
-- Main entry files: `main.tex`, `inlaga.tex`, `errata.tex`
-- Core chapters and thesis content: `TexFiles/`
-- Included/appended paper files: `papers/`
-- Compilation support assets (styles/classes): local `.sty`, `.cls`, `.bst`
-- Figures used by manuscript build: `figures/`
+Use it as a drop-in area for any LaTeX project, for example:
 
-Keep manuscript prose and evidence material separate.
+- a conference paper template,
+- a journal template,
+- a thesis template,
+- or multiple manuscript subprojects.
+
+## How to use
+
+1. Copy your venue template/project into this folder.
+2. Identify the entry `.tex` file.
+3. Compile with:
+
+```bash
+bash ./scripts/compile-thesis.sh quick manuscript/path/to/entry.tex
+bash ./scripts/compile-thesis.sh full manuscript/path/to/entry.tex
+```
+
+If you compile often from the same entry, set:
+
+```bash
+export MANUSCRIPT_ENTRY=manuscript/path/to/entry.tex
+```
+
+Then you can run:
+
+```bash
+bash ./scripts/compile-thesis.sh quick
+```

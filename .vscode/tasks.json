@@ -1,10 +1,18 @@
 {
   "version": "2.0.0",
+  "inputs": [
+    {
+      "id": "latexEntry",
+      "type": "promptString",
+      "description": "Entry .tex path (relative to workspace)",
+      "default": "manuscript/main.tex"
+    }
+  ],
   "tasks": [
     {
-      "label": "LaTeX: Compile main.tex",
+      "label": "LaTeX: Quick compile (choose entry)",
       "type": "shell",
-      "command": "bash ./scripts/compile-thesis.sh quick",
+      "command": "bash ./scripts/compile-thesis.sh quick ${input:latexEntry}",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -17,9 +25,9 @@
       }
     },
     {
-      "label": "LaTeX: Full compile (pdflatex + bibtex + pdflatex × 2)",
+      "label": "LaTeX: Full compile (choose entry)",
       "type": "shell",
-      "command": "bash ./scripts/compile-thesis.sh full",
+      "command": "bash ./scripts/compile-thesis.sh full ${input:latexEntry}",
       "group": {
         "kind": "build"
       },
@@ -30,17 +38,7 @@
       }
     },
     {
-      "label": "Thesis: Rebuild with appended papers",
-      "type": "shell",
-      "command": "bash ./scripts/compile-thesis.sh full",
-      "problemMatcher": "$latex",
-      "presentation": {
-        "reveal": "always",
-        "focus": true
-      }
-    },
-    {
-      "label": "LaTeX: Clean build artifacts",
+      "label": "LaTeX: Clean manuscript artifacts",
       "type": "shell",
       "command": "bash ./scripts/compile-thesis.sh clean",
       "problemMatcher": [],
@@ -49,9 +47,9 @@
       }
     },
     {
-      "label": "LaTeX: View main.pdf",
+      "label": "LaTeX: View compiled PDF (from entry)",
       "type": "shell",
-      "command": "open manuscript/main.pdf || xdg-open manuscript/main.pdf",
+      "command": "bash -lc 'entry=\"${input:latexEntry}\"; pdf=\"${entry%.tex}.pdf\"; open \"$pdf\" 2>/dev/null || xdg-open \"$pdf\"'",
       "problemMatcher": [],
       "presentation": {
         "reveal": "silent"

@@ -9,7 +9,7 @@ Core editor and extension configuration:
 - **Word wrap**: Enabled for comfortable editing of Markdown/LaTeX.
 - **File exclusions**: LaTeX build artifacts automatically hidden.
 - **LaTeX Workshop**: Compile recipes and PDF viewer configuration.
-- **Code Spell Checker**: Thesis-specific term dictionary.
+- **Code Spell Checker**: Academic/domain term dictionary.
 - **Markdown Linting**: Relaxed rules for academic prose.
 - **LTeX**: Grammar checking disabled by default (opt-in for polish phase).
 
@@ -26,10 +26,10 @@ To install all recommendations, run: `code --install-extension <id>` for each ID
 
 ### `tasks.json`
 Pre-configured build tasks:
-- **LaTeX: Compile main.tex** (Cmd+Shift+B default): Single pdflatex pass.
-- **LaTeX: Full compile**: Complete cycle (pdflatex → bibtex → pdflatex × 2).
-- **LaTeX: Clean build artifacts**: Remove .aux/.log/.synctex.gz etc.
-- **LaTeX: View main.pdf**: Open compiled PDF in default viewer.
+- **LaTeX: Quick compile (choose entry)** (Cmd+Shift+B default): Single pdflatex pass.
+- **LaTeX: Full compile (choose entry)**: Full cycle with optional bib/glossary tooling.
+- **LaTeX: Clean manuscript artifacts**: Remove build artifacts under `manuscript/`.
+- **LaTeX: View compiled PDF (from entry)**: Open PDF that matches chosen entry file.
 
 ### `cspell.json`
 Spell checker domain dictionary with academic/thesis terms. Add new technical terms or author names here to prevent false positives.
@@ -39,15 +39,16 @@ Spell checker domain dictionary with academic/thesis terms. Add new technical te
 1. Open Extensions panel (Cmd+Shift+X).
 2. Search "Recommended" to see suggested extensions.
 3. Install the core 3 extensions (LaTeX Workshop, Code Spell Checker, Markdown Lint).
-4. Open `manuscript/main.tex` and press Cmd+Shift+B to compile.
-5. View the compiled PDF in the right-pane tab.
+4. Place your template/project under `manuscript/`.
+5. Press Cmd+Shift+B and enter the entry `.tex` path when prompted.
+6. View the resulting PDF.
 
 ## Customization
 
 - **Spell check**: Edit `cSpell.ignoreWords` in `settings.json` or add journal acronyms to `cspell.json`.
 - **Compile recipe**: Modify LaTeX tools in `settings.json` to use `lualatex` or other engines.
 - **File exclusions**: Extend `files.exclude` for any additional build artifacts.
-- **Build tasks**: Add tasks in `tasks.json` for other LaTeX targets (inlaga.tex, errata.tex).
+- **Build tasks**: Use the entry prompt to compile any `.tex` target.
 
 ## Tips
 
@@ -60,11 +61,11 @@ Spell checker domain dictionary with academic/thesis terms. Add new technical te
 
 - **"pdflatex not found"**: Ensure TeX Live is installed (`brew install basictex` on macOS, `apt install texlive-full` on Linux).
 - **Font errors**: Install `cm-super` package for scalable Computer Modern fonts.
-- **PDF won't open**: Check build panel for errors; ensure `manuscript/main.pdf` exists.
+- **PDF won't open**: Check build panel for errors; ensure the expected `<entry>.pdf` exists.
 - **Spell check too aggressive**: Add words to `cspell.json` `ignoreWords` array.
 
 ## See Also
 
 - `.github/copilot-instructions.md`: Overview of repo structure and editing rules.
 - `.github/instructions/`: Detailed guidance for working with evidence, manuscript, notes, and review tasks.
-- `tasks/status.md`: Chapter completion tracking.
+- `tasks/status.md`: Project completion tracking.

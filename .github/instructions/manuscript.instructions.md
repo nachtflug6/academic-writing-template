@@ -271,7 +271,7 @@ Use these workflows for manuscript work that is not chapter-specific benchmarkin
 Use when you need a structural status snapshot before edits.
 
 Steps:
-- read `manuscript/main.tex` and included `manuscript/TexFiles/*.tex` files,
+- read the active entry file(s) and included source files within `manuscript/`,
 - map section hierarchy and file organization,
 - identify completion state (drafted vs stub/placeholder),
 - flag missing transitions, unsupported claims, weak passages,

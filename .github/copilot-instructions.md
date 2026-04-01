@@ -23,7 +23,7 @@ This repository is an **academic manuscript workspace**, not a software codebase
 - **Final manuscript** (`manuscript/`): Polished prose; must be factual and properly cited
 
 ### 4. Edit Targeting
-- **Prefer section edits**: Edit individual files in `manuscript/TexFiles/` rather than rewriting `main.tex`
+- **Prefer section edits**: Edit individual source files in the active manuscript project under `manuscript/` rather than rewriting whole documents
 - **Keep changes focused**: Make targeted improvements to clarity, structure, or argument flow
 - **Avoid wholesale rewrites**: Preserve author's voice and editorial decisions
 
@@ -55,9 +55,9 @@ This repository is an **academic manuscript workspace**, not a software codebase
 - `standards/feedback/` — traceable log of supervisor and examiner feedback rounds (dated files)
 
 ### Key folder map
-- Manuscript chapters: `manuscript/TexFiles/`
-- Figures and tables: `manuscript/TexFiles/figures/` and `manuscript/TexFiles/tables/`
-- Appended papers: `manuscript/papers/`
+- Manuscript source projects: `manuscript/`
+- Figures and tables: use paths defined by your chosen venue template inside `manuscript/`
+- Appended papers (if used): paths defined by your active manuscript project
 - Bibliography: `refs/references.bib`
 - Evidence: `evidence/literature/extracts/`, `evidence/literature/summaries/`, `evidence/claims/`, `evidence/reports/`
 - Task tracking: `tasks/status.md`, `tasks/backlog.md`
