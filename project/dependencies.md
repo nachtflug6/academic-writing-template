@@ -8,7 +8,7 @@
 ## Content
 
 - Bibliography sources in `refs/`
-- Evidence notes in `evidence/`
+- Handoff bundles in `handoff/`
 - Standards and constraints via `standards/requirements.md` (formal: `standards/formatting-requirements.md`, benchmark: `standards/benchmark-requirements.md`)
 
 ## Process

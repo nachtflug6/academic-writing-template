@@ -21,7 +21,7 @@ Treat information sources in this priority order:
 
 1. **University requirements** (`standards/requirements.md`): Thesis formatting and submission rules are non-negotiable
 2. **Thesis guidelines**: Your specific institution's thesis handbook or style guide
-3. **Source material** (`evidence/literature/extracts/`): Highest authority for research content
+3. **Handoff files** (`handoff/`): Current manuscript export and evidence match reports; highest authority for research content
 4. **Manuscript project files** (`manuscript/`): Venue template and source files for your current writing target
 5. **Main manuscript text**: Your authored prose and structure
 6. **Figures and tables**: Visual support material

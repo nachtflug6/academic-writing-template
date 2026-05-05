@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Generate timestamped claim-evidence match bundle.
 
-This script builds a dated folder in evidence/claims containing:
+This script builds a dated folder in handoff/ containing:
 - consolidated claim-evidence reports,
 - per-citekey markdown and json files,
 - bibliography metadata extracted from refs/references.bib,
-- linked-file references (symlinks where possible) to relevant evidence files.
+- linked-file references (symlinks where possible) to relevant handoff files.
 """
 
 from __future__ import annotations
@@ -20,16 +20,14 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
-CLAIMS_DIR = ROOT / "evidence" / "claims"
+CLAIMS_DIR = ROOT / "handoff"
 CLAIM_REPORT_JSON = CLAIMS_DIR / "citekey_claim_report.json"
 CLAIM_REPORT_MD = CLAIMS_DIR / "citekey_claim_report.md"
 CLAIM_REPORT_CSV = CLAIMS_DIR / "citekey_claim_report.csv"
 BIB_FILE = ROOT / "refs" / "references.bib"
 
 EVIDENCE_DIRS = [
-    ROOT / "evidence" / "literature" / "extracts",
-    ROOT / "evidence" / "literature" / "summaries",
-    ROOT / "evidence" / "reports",
+    ROOT / "handoff",
 ]
 
 

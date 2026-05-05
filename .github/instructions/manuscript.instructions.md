@@ -1,6 +1,6 @@
 # LaTeX Manuscript Editing Instructions
 
-Apply these guidelines when editing manuscript files, especially LaTeX sources in `manuscript/` and related evidence text in `evidence/`.
+Apply these guidelines when editing manuscript files, especially LaTeX sources in `manuscript/` and related evidence text in `handoff/`.
 
 ## Purpose
 

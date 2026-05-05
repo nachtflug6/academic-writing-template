@@ -8,6 +8,6 @@
 
 ## Next
 
-- [ ] Populate evidence folders with current working notes
+- [ ] Generate first handoff bundle (`python3 scripts/generate_handoff.py`) and review output
 - [ ] Update venue requirements with final institution-specific details
 - [ ] Finalize submission package checklist

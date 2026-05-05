@@ -1,6 +1,11 @@
 # Evidence Editing Instructions
 
-Apply these guidelines when editing files under `evidence/`.
+> **DEPRECATED**: The `evidence/` directory is no longer used. Evidence and source material
+> are now managed through the `handoff/` directory. See `handoff/README.md` for the current workflow.
+>
+> The classification principles below (sections 3–6) still apply when working with handoff files.
+
+Apply these guidelines when editing files under `handoff/`.
 
 ## Purpose
 
@@ -68,29 +73,13 @@ If verification is incomplete, mark it clearly.
 
 ---
 
-## 2. Evidence areas
+## 2. Handoff file roles
 
-Use the following file roles consistently:
+- `handoff/YYYY-MM-DD_manuscript.md` — citation-free manuscript export with embedded CLAIM annotations
+- `handoff/support_YYYY-MM-DD.md` — evidence match report from the evidence repo
+- `handoff/iterations/YYYY-MM-DD_HHMM/` — archived iterations; move consumed reports here after use
 
-- `evidence/literature/extracts/`
-	Close-to-source notes, quoted or near-source passages, retrieval logs, local interpretations tied tightly to source text.
-
-- `evidence/literature/summaries/`
-	Synthesized literature summaries that combine multiple sources while preserving attribution and uncertainty.
-	
-	**Note on canonical books**: Summaries of canonical textbooks (e.g., Box-Jenkins time series, Montgomery DOE, Goodfellow deep learning) are separately maintained in `2026-03-28_canonical_books_summaries.md`. When citing these books for background framing, reference both the bibliography entry and this summary document for examiner context. Canonical-book citations are appropriate for establishing frameworks and standard terminology, not for empirically precise or contested claims—use article/proceedings sources for those.
-
-- `evidence/claims/`
-	Claim-support notes, evidence mapping, citation-needed material, support gaps, and defensibility checks.
-
-- `evidence/reports/`
-	Supporting reports, white-paper style documents, structured internal summaries, or evidence-based background documents.
-
-- `evidence/experiments/run-notes/`
-	Execution notes, experiment logs, procedural notes, anomalies, deviations, and unresolved issues.
-
-- `evidence/experiments/result-summaries/`
-	Interpreted result summaries with explicit distinction between result, interpretation, and limitation.
+See `handoff/README.md` for the full workflow.
 
 ---
 
@@ -230,11 +219,11 @@ Remember:
 - Claims about what is new, unsolved, or uncertain in the field
 
 **Citation strategy**:
-1. **Background framing**: Cite canonical books liberally; examine the canonical-books summary document (`evidence/literature/summaries/2026-03-28_canonical_books_summaries.md`) to confirm scope match
-2. **Precise claims**: Follow with article/proceedings citations (via SmartLibrary extraction logs or direct evidence files)
-3. **Examiner guidance**: Do not assume all readers have read every canonical book; brief context (from the summary) may help justify textbook-only citations in some contexts
+1. **Background framing**: Cite canonical books liberally; check the handoff bundle's claim-evidence report for confirmed scope matches
+2. **Precise claims**: Follow with article/proceedings citations (via SmartLibrary extraction logs or direct handoff reports)
+3. **Examiner guidance**: Do not assume all readers have read every canonical book; brief context may help justify textbook-only citations in some contexts
 
-See `evidence/claims/` for mapping specific manuscript claims to their evidence anchors across both book and article sources.
+See the latest `handoff/` bundle for mapping specific manuscript claims to their evidence anchors across both book and article sources.
 
 ---
 

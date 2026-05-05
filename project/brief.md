@@ -29,7 +29,7 @@ bash ./scripts/compile-thesis.sh clean
 This workspace intentionally separates:
 
 - Manuscript source in `manuscript/`
-- Evidence work in `evidence/`
+- Handoff bundles in `handoff/`
 - Planning in `project/` and `tasks/`
 - Venue rules in `standards/` and `venue/`
 - Submission readiness in `submission/`

@@ -21,7 +21,7 @@ from typing import Dict, List, Optional, Set, Tuple
 ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT_ROOT = ROOT / "manuscript"
 MAIN_TEX = MANUSCRIPT_ROOT / "main.tex"
-OUTPUT_DIR = ROOT / "evidence" / "claims"
+OUTPUT_DIR = ROOT / "handoff"
 
 
 INCLUDE_RE = re.compile(r"\\(include|input)\s*\{([^}]+)\}")

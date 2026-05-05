@@ -6,7 +6,7 @@ It is intentionally neutral: thesis, paper, report, survey, or mixed projects ar
 ## Core Idea
 
 - `manuscript/` is a drop-in area for whatever LaTeX project/template you use.
-- `evidence/` stores source-oriented notes and claim support.
+- `handoff/` stores timestamped export bundles for evidence work and review.
 - `refs/` stores bibliography sources.
 - `project/`, `tasks/`, `standards/`, and `submission/` support planning and compliance.
 
@@ -49,7 +49,7 @@ bash ./scripts/compile-thesis.sh quick
 .
 ├── manuscript/                    # Drop-in LaTeX project workspace
 ├── refs/                          # Bibliography and reference management artifacts
-├── evidence/                      # Source extracts, summaries, claims, reports, experiment notes
+├── handoff/                       # Timestamped export bundles (manuscript, bibliography, claim-evidence report)
 ├── project/                       # Scope, outline, and project-level framing
 ├── tasks/                         # Status and backlog tracking
 ├── standards/                     # Institutional requirements, benchmarks, and feedback logs
